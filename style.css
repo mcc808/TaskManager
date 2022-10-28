@@ -1,0 +1,42 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+h1{
+    background-color: #212121;
+    color:white;
+    padding: 5px 0;
+    text-align: center;
+    margin: 0;
+}
+
+.parent{
+    display: flex;
+}
+.list{
+    flex: 3;
+}
+.form{
+    flex: 1;
+}
+.my-control{
+    display: flex;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.my-control label{
+    width: 110px;
+    text-align: left;
+    margin-right: 5px;
+}
+.my-control input, .my-control select, .my-control textarea{
+    flex-grow: 1;
+}
+.icon{
+    font-size: 25px;
+    color: #6a6a6a;
+    cursor: pointer;
+}

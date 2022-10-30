@@ -55,6 +55,11 @@ h3{
     padding: 7px 30px;
     margin-top: 10px;
 }
+#btnHideForm{
+    position: absolute;
+    top: 70px;
+    right: 550px;
+}
 .task{
     border: 1px solid rgb(248, 85, 10);
     background-color: rgba(248, 85, 10, 0.475);

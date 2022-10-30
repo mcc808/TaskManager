@@ -39,10 +39,29 @@ function saveTask(){
     let task = new Task(isImportant,title,description,priority,dueDate,contact,participants,color);
     console.log(task);
 
+    //save the task on the server
+    
+    //CREATE A POST REQUEST TO: http://fsdiapi.azurewebsites.net/api/tasks/
+
+    $.ajax({
+        type: "POST",
+        url: "http://fsdiapi.azurewebsites.net/api/tasks/",
+        data: JSON.stringify(task),
+        contentType:"application/json",
+        success:function(res){
+            display(task);
+            clearForm(task);
+        },
+        error:function(error){
+            console.log(error);
+        }
+    });
+
     //console.log("Saving task...");
     //console.log(task);
-    display(task);
-    clearForm(task);
+
+    //display(task);
+    //clearForm(task);
 }
 
 function clearForm(){
@@ -58,7 +77,7 @@ function clearForm(){
 function display(task){
     console.log(task.title);
 
-    let syntax = `<div class="task">
+    let syntax = `<div class="task" style="boder-color:${task.color}">
         <div class"head">
             <h5>${task.title}</h5>
             <p>${task.description}</p>
@@ -78,10 +97,45 @@ function display(task){
     $("#task-list").append(syntax);
 }
 
+function testGet(){
+    $.ajax({type: "GET",url:"http://fsdiapi.azurewebsites.net/",
+    success:function(response){
+        console.log(response);
+    },
+    error:function(error){
+        console.log(error);
+ }});
+
+}
+
+function fetchTasks(){
+    //load the tasks from the server and display name
+    //send the request to: http://fsdiapi.azurewebsites.net/api/tasks
+    //console log the response from the server
+
+    $.ajax({
+        type: "GET", 
+        url: "http://fsdiapi.azurewebsites.net/api/tasks",
+        success: function(res){
+            let list = JSON.parse(res);
+            for (let i = 0; i < list.length; i++) {
+                let task = list[i];
+                //if the task is yours, then display
+                if(task.developer === "Manuel"){
+                    display(task);
+                }
+            }
+        },
+        error: function(details){
+            console.log(details);
+        }
+    });
+}
+
 function init(){
     console.log("Task Manager");
     //load data
-
+    fetchTasks();
 
     //hook events
     $('#btnSave').click(saveTask);

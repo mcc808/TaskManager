@@ -28,30 +28,31 @@ function toggleForm(){
 }
 
 function saveTask(){
-    //console.log("Saving task...");
     let title = $('#txtTitle').val();
-    let desc = $('#txtDescription').val();
+    let description = $('#txtDescription').val();
     let priority = $('#selPriority').val();
     let dueDate = $('#selDueDate').val();
     let contact = $('#txtContact').val();
     let participants = $('#txtParticipants').val();
     let color = $('#selColor').val();
 
-    let task = new Task(isImportant,title,desc,priority,dueDate, contact, participants, color);
-
+    let task = new Task(isImportant,title,description,priority,dueDate,contact,participants,color);
     console.log(task);
+
+    //console.log("Saving task...");
+    //console.log(task);
     display(task);
-    clearForm();
+    clearForm(task);
 }
 
 function clearForm(){
     $('#txtTitle').val("");
     $('#txtDescription').val("");
-    $('##selPriority').val("");
-    $('##selDueDate').val("");
+    $('#selPriority').val("");
+    $('#selDueDate').val("");
     $('#txtContact').val("");
     $('#txtParticipants').val("");
-    $('#selColor').val("");
+    $('#selColor').val("#000000");
 }
 
 function display(task){
@@ -69,8 +70,8 @@ function display(task){
         </div>
 
         <div class="tail">
-            <label>${task.title}</label>
-            <label>${task.description}</label>
+            <label>${task.contact}</label>
+            <label>${task.participants}</label>
         </div>
     </div>`;
 
